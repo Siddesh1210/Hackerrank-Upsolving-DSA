@@ -3,7 +3,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.Collections;
-public class ArrayListIteration2D {
+public class ArrayList2D{
     public static void main(String[] args) {
         ArrayList<ArrayList<Integer>> orders=new ArrayList<>();
 
@@ -12,26 +12,26 @@ public class ArrayListIteration2D {
 
         ArrayList<Integer> arr1=new ArrayList<>();
         arr1.add(1);
-        arr1.add(2);
         arr1.add(3);
-        // arr1.add(3);
+        // arr1.add(2);
         // arr1.add(4);
 
         ArrayList<Integer> arr2=new ArrayList<>();
+        arr2.add(2);
         arr2.add(3);
-        arr2.add(3);
-        arr2.add(3);
-        // arr2.add(1);
+        // arr2.add(6);
+        // arr2.add(2);
+        // arr2.add(3);
         // arr2.add(3);
 
-        // ArrayList<Integer> arr3=new ArrayList<>();
-        // arr3.add(1);
+        ArrayList<Integer> arr3=new ArrayList<>();
+        arr3.add(3);
         // arr3.add(2);
-        // arr3.add(3);
+        arr3.add(3);
 
         orders.add(arr1);
         orders.add(arr2);
-        // orders.add(arr3);
+        orders.add(arr3);
 
         // System.out.println(orders);
         // for (ArrayList<Integer> key : orders) {
@@ -57,47 +57,37 @@ public class ArrayListIteration2D {
         // System.out.println(orders.get(1).get(3));
         // System.out.println(orders.get(1).get(4));
 
-        int len=orders.get(0).size();
-        // System.out.println(len);
-        int arr[]=new int[len];
+        int arr[]=new int[orders.size()];
 
-        int l=0;
-        for(int j=0;j<len;j++)
+        for(int i=0;i<orders.size();i++)
         {
-            arr[j]=orders.get(l).get(j)+orders.get(l+1).get(j);
-            // System.out.println(arr[j]);
+            for(int j=0;j<orders.get(i).size();j++)
+            {
+                arr[i]+=orders.get(i).get(j);
+            }
+            sortCustomer.add(arr[i]);
         }
         
 
-        // System.out.println(Arrays.toString(arr));
+        System.out.println(Arrays.toString(arr));
+        Collections.sort(sortCustomer);
+        System.out.println(sortCustomer);
         // // System.out.println(sortCustomer);
 
-        //9 6 11 4 7
-
-        HashMap<Integer,Integer> hm=new HashMap<>();
-        for(int i=0;i<arr.length;i++)
-        {
-            hm.put(i+1,arr[i]);
-        }
-
-        Set<Integer> k=hm.keySet();
-        for (Integer key : k) {
-            sortCustomer.add(hm.get(key));            
-        }
-
-        Collections.sort(sortCustomer);
+        //11 11 8 5 7
 
         for(int i=0;i<sortCustomer.size();i++)
         {
-            for (Integer key : k) {
-                if(hm.get(key)==sortCustomer.get(i))
+            for(int j=0;j<arr.length;j++)
+            {
+                if(sortCustomer.get(i)==arr[j])
                 {
-                    finalArr.add(key);
-                    continue;
-                }         
+                    finalArr.add(j+1);
+                    arr[j]=Integer.MAX_VALUE;
+                    j=sortCustomer.size();
+                }
             }
         }
-
         System.out.println(finalArr);
 
     }
